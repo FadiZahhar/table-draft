@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html>
+<head>
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>        <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Videos</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+       <!-- css -->
+        <link rel="stylesheet" href="grid.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+<section id="videos"></section>
+<!-- Scripts go here -->
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
+        <script type="text/javascript">
+        $(function(){
+          //$('#usersnav ul li a').on('click', function(e){
+            //e.preventDefault();
+            var htmlString  = '<div class="grid-container"><h1> Videos</h1>';
+            //var channelname = $(this).attr('href').substring(1);
+            var ytapiurl    = 'http://gdata.youtube.com/feeds/api/users/yamenest/uploads?alt=json';
+            var cnt = 0;
+            $.getJSON(ytapiurl, function(data) {
+              $.each(data.feed.entry, function(i, item) {
+                var title    = item['title']['$t'];
+                var content    = item['content']['$t'];
+                content = content.split(' - ');
+                var videoid  = item['id']['$t'];
+
+                var pubdate  = item['published']['$t'];
+                var fulldate = new Date(pubdate).toLocaleDateString();
+
+                var thumbimg = item['media$group']['media$thumbnail'][0]['url'];
+                var tinyimg1 = item['media$group']['media$thumbnail'][1]['url'];
+                var tinyimg2 = item['media$group']['media$thumbnail'][2]['url'];
+                var tinyimg3 = item['media$group']['media$thumbnail'][3]['url'];
+
+                var vlink    = item['media$group']['media$content'][0]['url'];
+                var ytlink   = item['media$group']['media$player'][0]['url'];
+                var numviews = item['yt$statistics']['viewCount'];
+                var numcomms = item['gd$comments']['gd$feedLink']['countHint'];
+
+                var html = '<a href="'+content[1]+'" target="_blank"><div class="col-2">';
+                    html += '<img src="'+thumbimg+'" width="100%" />';
+                    html += '<div>'+title+'</div>';
+                    html += '<span>'+ytlink+'</span><br/>';
+                    html += '<span>'+numviews+' views  |  '+fulldate+'</span></div></a>';
+
+
+                if(cnt==0) {
+                  htmlString +='<div class="row column_three">';
+                  htmlString += html;
+                  cnt++;
+                }
+                else if(cnt==1) {
+                  htmlString += html;
+                  cnt++;
+                }
+                else if(cnt==2) {
+                  htmlString += html;
+                  htmlString += '</div>';
+                  cnt=0;
+                }
+
+              }); // end each loop
+
+              $('section#videos').html(htmlString + "</div>");
+            }); // end json parsing
+          //}); // end click event handler
+
+          // commafy function source
+          // http://stackoverflow.com/a/6785438/477958
+          function commafy( arg ) {
+           arg += '';
+           var num = arg.split('.');
+           if (typeof num[0] !== 'undefined'){
+              var int = num[0];
+              if (int.length > 3){
+                 int     = int.split('').reverse().join('');
+                 int     = int.replace(/(\d{3})/g, "$1,");
+                 int     = int.split('').reverse().join('')
+              }
+           }
+           if (typeof num[1] !== 'undefined'){
+              var dec = num[1];
+              if (dec.length > 4){
+                 dec     = dec.replace(/(\d{3})/g, "$1 ");
+              }
+           }
+
+           return (typeof num[0] !== 'undefined'?int:'')
+                + (typeof num[1] !== 'undefined'?'.'+dec:'');
+          }
+        });
+        </script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,127 @@
+/*** CSS Reset ***/
+
+h1,h2,h3,h4 body {
+    font-family: 'Source Sans Pro';
+    font-weight:300;
+}
+
+
+section#videos  h1 { font-size: 3em; font-family: 'Open Sans', sans-serif; margin-left:15px; }
+section#videos  div { font-size:1em; font-family: 'Open Sans', sans-serif;  color:#747474;}
+section#videos  h2 { font-family: 'Open Sans', sans-serif; color:#747474; font-size:1em; /*margin-bottom: 15px;*/ line-height:0px }
+section#videos  h3,  span { font-family: 'Playfair Display', serif; color:#747474; font-size:0.75em; line-height:0px; }
+section#videos span {font-family: 'Playfair Display', serif;  margin:0 auto; }
+
+section#single_post  h1 { font-size: 3em; font-family: 'Open Sans', sans-serif; margin-left:15px; }
+section#single_post  h2 { font-family: 'Open Sans', sans-serif; color:#747474; font-size:2em; margin-left: 15px; line-height:0px }
+section#single_post  h3,  span { font-family: 'Open Sans', sans-serif; color:#747474; font-size:1em; line-height:0px; }
+section#single_post span {font-family: 'Open Sans', sans-serif;  margin:0 auto; font-size:2em; }
+section#single_post p { color:#747474; margin-left:0px!important; text-align:justify; font-family: 'Playfair Display', serif; font-size:1em;}
+  div.grid-container  p { color:#747474; margin-left:15px!important;}
+  .share-this {
+    float:left;width:auto;padding-top:8px
+  }
+  .post-count {
+    width:auto;margin-left:15px
+  }
+html, body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    min-width: 100%;
+    max-width: 100%;
+
+
+}
+
+a {
+    color: #888;
+    text-decoration: none;
+}
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+
+
+
+/**** END Reset ***/
+
+body {
+    font-family: Arial, sans-serif;
+    color: #000;
+    background: #fff;
+}
+
+h1 {/* margin-left: 15px; */}
+
+.grid-container{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+/*-- our cleafix hack -- */
+.row:before,
+.row:after {
+    content:"";
+    display: table ;
+    clear:both;
+}
+
+[class*='col-'] {
+    float: left;
+    min-height: 1px;
+    /*-- our gutter -- */
+    padding: 15px;
+
+}
+
+/* Columns widths */
+
+.col-1{ width: 25%;}
+.col-2{ width: 33.33%;}
+.col-3{ width: 50%;}
+.col-4{ width: 83.33%;}
+.col-5{ width: 100%;}
+
+
+.outline, .outline *{
+    outline: 1px solid #ddd;
+}
+
+
+[class*='col-'] > p {
+ background-color: #fff;
+ padding: 0;
+ margin: 0;
+ text-align: center;
+
+}
+
+
+@media all and (max-width:800px){
+    .col-1{ width: 33.33%;  }
+    .col-2{ width: 50%;     }
+    .col-3{ width: 83.33%;  }
+    .col-4{ width: 100%;    }
+    .col-5{ width: 100%;    }
+    .col-6{ width: 100%;    }
+
+    .row .col-2:last-of-type{
+        width: 100%;
+    }
+
+    .row .col-5 ~ .col-1{
+        width: 100%;
+    }
+}
+
+@media all and (max-width:650px){
+    .col-1{ width: 50%;     }
+    .col-2{ width: 100%;    }
+    .col-3{ width: 100%;    }
+    .col-4{ width: 100%;    }
+    .col-5{ width: 100%;    }
+    .col-6{ width: 100%;    }
+}
